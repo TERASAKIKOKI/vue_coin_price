@@ -11,11 +11,31 @@
 </head>
 <body>
   <div id="app">
-   
+    <h2>BitCoin Price</h2>
+
+    <section v-if="hasError">
+      Error.
+    </section>
+    <section v-else>
+      <div v-if="loading">
+        Loding...
+      </div>
+      <div v-else>
+      <!-- v-cloakでちらつき防止 => cssでdisply:none;  -->
+        <ul v-cloak>  
+          <li v-for="(rate, currency) in bpi">
+              {{ currency }} : {{ rate.rate_float | currencyDecimal }}
+          </li>
+        </ul>
+      </div>
+    </section>
   </div>
 
 
+  <!-- vue cdn -->
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <!-- axios cdn -->
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
